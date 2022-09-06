@@ -6,3 +6,7 @@ data:
   mosquitto.conf: |
     listener 9001
     protocol websockets
+    allow_anonymous false
+    password_file /mosquitto/config/mosquitto_password
+  mosquitto_password: |
+    suapapa:$7$101$jOYTkkAW4xlpa49y$dbsbO48JsEsIxsTwSkaezHAEV3JUuGVjHDV321C7F7aKOi9q6vaMf2lWQiD0Fm0cNn4aEVtIFK2BRXZ1hlnXAA==

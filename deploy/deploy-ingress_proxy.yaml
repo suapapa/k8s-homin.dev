@@ -34,6 +34,9 @@ spec:
             - name: https
               containerPort: 443
               hostPort: 443
+            - name: tcp
+              containerPort: 9001
+              hostPort: 9001
           volumeMounts:
             - name: ingress-links
               subPath: links.yaml
