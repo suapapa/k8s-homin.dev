@@ -28,3 +28,10 @@ data:
       link: http://website.default.svc.cluster.local:8080
       reverse_proxy: true
       hide: true
+    
+    - name: mqtt
+      link: mosquitto.default.svc.cluster.local
+      port_foward: true
+      in_port: 9001
+      out_port: 9001
+      hide: true
