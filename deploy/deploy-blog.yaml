@@ -8,7 +8,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 8080
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: blog
 ---
@@ -32,4 +32,4 @@ spec:
       - image: 'gcr.io/homin-dev/blog:latest'
         name: blog
         ports:
-          - containerPort: 80
+          - containerPort: 8080
