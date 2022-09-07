@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gb
+  labels:
+    app: gb
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: gb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gb
+  name: gb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gb
+  template:
+    metadata:
+      labels:
+        app: gb
+    spec:
+      containers:
+      - image: 'gcr.io/homin-dev/gb:latest'
+        # args: ["-root", "gb"]
+        name: gb
+        ports:
+          - containerPort: 8080
+        env:
+          - name: MQTT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: mqtt_username
+          - name: MQTT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: mqtt_password
+      volumes:
+        - name: mysecret
+          secret:
+            secretName: mysecret

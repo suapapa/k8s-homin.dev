@@ -24,10 +24,10 @@ data:
       link: http://suapapa.github.io/blog
       desc: 닥치는대로 해킹하는 블로그
 
-    - name: website
-      link: http://website.default.svc.cluster.local:8080
+    - name: gb
+      link: http://gb.default.svc.cluster.local:8080
       reverse_proxy: true
-      hide: true
+      desc: Guestbook
     
     - name: mqtt
       link: mosquitto.default.svc.cluster.local
