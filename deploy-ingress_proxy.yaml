@@ -43,6 +43,17 @@ spec:
               mountPath: /conf/links.yaml 
             - name: cert-letsencrypt
               mountPath: /etc/letsencrypt
+          env:
+            - name: TELEGRAM_APITOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: telegram_apitoken
+            - name: TELEGRAM_ROOM_ID
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: telegram_room_id
       volumes:
         - name: ingress-links
           configMap:
