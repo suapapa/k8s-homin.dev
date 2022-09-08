@@ -4,31 +4,32 @@ metadata:
   name: ingress-links
 data:
   links.yaml: |
-    - name: resume
-      link: https://suapapa.github.io/resume/
-      desc: 온라인 이력서
+    - name: blog
+      link: http://suapapa.github.io/blog
+      desc: 이것저것 해킹 블로그
 
     - name: github
       link: https://github.com/suapapa
       desc: 오픈소스 프로젝트
 
-    - name: instagram
-      link: https://www.instagram.com/homin1227/
-      desc: 일상 사진
-
     - name: youtube
       link: https://www.youtube.com/c/HominLee
       desc: 취미 동영상
 
-    - name: blog
-      link: http://suapapa.github.io/blog
-      desc: 닥치는대로 해킹하는 블로그
+    - name: instagram
+      link: https://www.instagram.com/homin1227/
+      desc: 일상 사진
 
     - name: gb
-      link: http://gb.default.svc.cluster.local:8080
+      link: https://homin.dev/gb
       reverse_proxy: true
-      desc: Guestbook
+      reverse_proxy_link: http://gb.default.svc.cluster.local:8080
+      desc: 방명록
     
+    - name: resume
+      link: https://suapapa.github.io/resume/
+      desc: 온라인 이력서
+
     - name: mqtt
       link: mosquitto.default.svc.cluster.local
       port_foward: true
