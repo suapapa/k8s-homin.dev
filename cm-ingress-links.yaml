@@ -36,3 +36,9 @@ data:
       in_port: 9001
       out_port: 9001
       hide: true
+
+    - name: asset
+      link: https://homin.dev/asset
+      reverse_proxy: true
+      reverse_proxy_link: http://asset.default.svc.cluster.local:8080
+      hide: true
