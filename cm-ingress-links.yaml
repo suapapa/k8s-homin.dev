@@ -5,8 +5,10 @@ metadata:
 data:
   links.yaml: |
     - name: blog
-      link: http://suapapa.github.io/blog
+      link: http://homin.dev/blog
       desc: 이것저것 해킹 블로그
+      reverse_proxy: true
+      reverse_proxy_link: http://blog.default.svc.cluster.local:8080
 
     - name: github
       link: https://github.com/suapapa
