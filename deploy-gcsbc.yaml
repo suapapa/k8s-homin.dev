@@ -34,7 +34,7 @@ spec:
         cloud.google.com/gke-nodepool: work-pool
       containers:
       - image: "gcr.io/homin-dev/gcsbc:latest"
-        args: ["-d", "1h", "-f", "asset", "/bucket"]
+        args: ["-e", "36000", "-d", "1h", "-f", "asset", "/bucket"]
         name: asset
         ports:
           - containerPort: 8080

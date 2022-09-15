@@ -62,3 +62,6 @@ spec:
           hostPath:
             path: /etc/letsencrypt
             type: DirectoryOrCreate
+        - name: mysecret
+          secret:
+            secretName: mysecret
