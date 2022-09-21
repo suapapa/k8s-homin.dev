@@ -25,7 +25,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: ingress-proxy
-          image: 'gcr.io/homin-dev/ingress:latest'
+          image: 'gcr.io/homin-dev/ingress-proxy:latest'
           args: ["-c", "/conf/links.yaml"]
           ports:
             - name: http
