@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress
+  labels:
+    app: ingress
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: ingress
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ingress
+  name: ingress
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ingress
+  template:
+    metadata:
+      labels:
+        app: ingress
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: work-pool
+      containers:
+      - image: 'gcr.io/homin-dev/ingress:latest'
+        args: ["-p", "ingress", "-c", "/conf/links.yaml"]
+        name: ingress
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - name: ingress-links
+            subPath: links.yaml
+            mountPath: /conf/links.yaml 
+        env:
+          - name: TELEGRAM_APITOKEN
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: telegram_apitoken
+          - name: TELEGRAM_ROOM_ID
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: telegram_room_id
+      volumes:
+        - name: ingress-links
+          configMap:
+            name: ingress-links
+        - name: mysecret
+          secret:
+            secretName: mysecret
