@@ -32,7 +32,7 @@ spec:
         cloud.google.com/gke-nodepool: work-pool
       containers:
       - image: 'gcr.io/homin-dev/gb:latest'
-        # args: ["-root", "gb"]
+        args: ["-p", "gb"]
         name: gb
         ports:
           - containerPort: 8080

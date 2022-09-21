@@ -42,6 +42,10 @@ data:
       reverse_proxy_link: http://gb.default.svc.cluster.local:8080
       desc: 방명록
 
+    - name: support
+      link: http://homin.dev/support
+      desc: 대가없는 🥩 환영합니다
+
     - name: mqtt
       link: mosquitto.default.svc.cluster.local
       port_foward: true
