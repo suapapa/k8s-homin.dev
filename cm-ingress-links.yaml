@@ -9,6 +9,11 @@ data:
       reverse_proxy_link: http://ingress.default.svc.cluster.local:8080
       hide: true
 
+    - name: /ingress
+      link: https://homin.dev/ingress
+      reverse_proxy_link: http://ingress.default.svc.cluster.local:8080
+      hide: true
+
     - name: /blog
       link: https://homin.dev/blog
       reverse_proxy_link: http://blog.default.svc.cluster.local:8080
