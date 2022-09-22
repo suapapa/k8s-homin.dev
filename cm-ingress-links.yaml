@@ -7,13 +7,11 @@ data:
     - name: /
       link: https://homin.dev/ingress
       reverse_proxy_link: http://ingress.default.svc.cluster.local:8080
-      reverse_proxy: true
       hide: true
 
     - name: /blog
       link: https://homin.dev/blog
       reverse_proxy_link: http://blog.default.svc.cluster.local:8080
-      reverse_proxy: true
       desc: 이것저것 해킹 블로그
 
     - name: /yt
@@ -27,13 +25,11 @@ data:
     - name: /resume
       link: https://homin.dev/resume
       reverse_proxy_link: http://resume.default.svc.cluster.local:8080
-      reverse_proxy: true
       desc: 온라인 이력서
 
     - name: /wiki
       link: https://homin.dev/wiki/
       reverse_proxy_link: http://wiki.default.svc.cluster.local:8080
-      reverse_proxy: true
       desc: Wiki (old archive)
 
     - name: /fb
@@ -47,13 +43,11 @@ data:
     - name: /gb
       link: https://homin.dev/gb
       reverse_proxy_link: http://gb.default.svc.cluster.local:8080
-      reverse_proxy: true
       desc: 방명록
 
     - name: /support
       link: https://homin.dev/ingress/support
       reverse_proxy_link: http://ingress.default.svc.cluster.local:8080
-      reverse_proxy: true
       desc: 대가없는 🥩 환영합니다
 
     - name: /mqtt
@@ -66,5 +60,4 @@ data:
     - name: /asset
       link: https://homin.dev/asset
       reverse_proxy_link: http://asset.default.svc.cluster.local:8080
-      reverse_proxy: true
       hide: true

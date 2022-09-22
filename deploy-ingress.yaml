@@ -20,6 +20,12 @@ metadata:
   name: ingress
 spec:
   replicas: 3
+  minReadySeconds: 1
+  strategy:  
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0 
   selector:
     matchLabels:
       app: ingress
@@ -31,7 +37,7 @@ spec:
       nodeSelector:
         cloud.google.com/gke-nodepool: work-pool
       containers:
-      - image: 'gcr.io/homin-dev/ingress:latest'
+      - image: 'gcr.io/homin-dev/ingress:v1.0.4'
         args: ["-p", "ingress", "-c", "/conf/links.yaml"]
         name: ingress
         ports:
