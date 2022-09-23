@@ -66,3 +66,8 @@ data:
       link: https://homin.dev/asset
       reverse_proxy_link: http://asset.default.svc.cluster.local:8080
       hide: true
+
+    - name: /diagrams-srv
+      link: https://homin.dev/diagrams-srv
+      reverse_proxy_link: http://diagrams-srv.default.svc.cluster.local:8080
+      hide: true

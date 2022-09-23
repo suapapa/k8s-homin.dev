@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: diagrams-srv
+  labels:
+    app: diagrams-srv
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: diagrams-srv
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: diagrams-srv
+  name: diagrams-srv
+spec:
+  replicas: 1
+  minReadySeconds: 1
+  strategy:  
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0 
+  selector:
+    matchLabels:
+      app: diagrams-srv
+  template:
+    metadata:
+      labels:
+        app: diagrams-srv
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: work-pool
+      containers:
+        - name: diagrams-srv
+          image: 'gcr.io/homin-dev/diagrams_srv:latest'
+          args: ["-c", "gcr.io/homin-dev/diagrams:latest"]
+          resources: 
+            limits: 
+                cpu: 10m 
+                memory: 256Mi 
+          ports:
+            - name: http
+              containerPort: 8080
+              hostPort: 8080
+          volumeMounts:
+            - name: docker-sock
+              mountPath: /var/run
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run
