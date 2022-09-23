@@ -1,17 +1,17 @@
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: diagrams-srv
-#   labels:
-#     app: diagrams-srv
-# spec:
-#   type: ClusterIP
-#   ports:
-#     - port: 8080
-#       targetPort: 8080
-#   selector:
-#     app: diagrams-srv
-# ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: diagrams-srv
+  labels:
+    app: diagrams-srv
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: diagrams-srv
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
