@@ -26,7 +26,7 @@ spec:
       containers:
         - name: ingress-proxy
           image: 'gcr.io/homin-dev/ingress-proxy:latest'
-          args: ["-c", "/conf/links.yaml"]
+          args: ["-c", "/conf/links.yaml", "-d"]
           ports:
             - name: http
               containerPort: 80
