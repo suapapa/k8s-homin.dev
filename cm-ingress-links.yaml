@@ -67,7 +67,7 @@ data:
       reverse_proxy_link: http://asset.default.svc.cluster.local:8080
       hide: true
 
-    - name: /diagrams
-      link: https://homin.dev/diagrams-fe
-      reverse_proxy_link: http://diagrams-fe.default.svc.cluster.local:8080
+    - name: /dsb
+      link: https://homin.dev/diagrams-sandbox
+      reverse_proxy_link: http://diagrams-sandbox.default.svc.cluster.local:8080
       hide: true
