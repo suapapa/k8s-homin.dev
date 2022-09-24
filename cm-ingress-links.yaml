@@ -71,3 +71,8 @@ data:
       link: https://homin.dev/dsb/
       reverse_proxy_link: http://dsb.default.svc.cluster.local:8080
       hide: true
+
+    - name: /dsb-api
+      link: https://homin.dev/dsb-api/
+      reverse_proxy_link: http://dsb-api.default.svc.cluster.local:8080
+      hide: true

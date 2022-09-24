@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dsb
+  labels:
+    app: dsb
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: dsb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dsb
+  name: dsb
+spec:
+  replicas: 1
+  minReadySeconds: 1
+  # strategy:  
+  #   type: RollingUpdate
+  #   rollingUpdate:
+  #     maxSurge: 1
+  #     maxUnavailable: 0 
+  selector:
+    matchLabels:
+      app: dsb
+  template:
+    metadata:
+      labels:
+        app: dsb
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: work-pool
+      containers:
+        - name: diagrams-fe
+          image: 'gcr.io/homin-dev/diagrams_fe:latest'
+          # resources: 
+          #   limits: 
+          #       cpu: 10m 
+          #       memory: 256Mi 
+          ports:
+            - name: http
+              containerPort: 8080
+              hostPort: 8080
