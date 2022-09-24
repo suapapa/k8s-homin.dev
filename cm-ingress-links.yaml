@@ -68,6 +68,6 @@ data:
       hide: true
 
     - name: /dsb
-      link: https://homin.dev/diagrams-sandbox
-      reverse_proxy_link: http://diagrams-sandbox.default.svc.cluster.local:8080
+      link: https://homin.dev/dsb/
+      reverse_proxy_link: http://dsb.default.svc.cluster.local:8080
       hide: true
