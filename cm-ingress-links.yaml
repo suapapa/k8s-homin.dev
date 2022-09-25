@@ -19,6 +19,11 @@ data:
       reverse_proxy_link: http://blog.default.svc.cluster.local:8080
       desc: 이것저것 해킹 블로그
 
+    - name: /dsb
+      link: https://homin.dev/dsb/
+      reverse_proxy_link: http://dsb.default.svc.cluster.local:8080
+      desc: Diagrams Sandbox
+
     - name: /yt
       link: https://www.youtube.com/c/HominLee
       desc: 취미 영상
@@ -51,7 +56,7 @@ data:
       desc: 방명록
 
     - name: /support
-      link: https://homin.dev/ingress/support
+      link: https://homin.dev/support
       reverse_proxy_link: http://ingress.default.svc.cluster.local:8080
       desc: 대가없는 🥩 환영합니다
 
@@ -65,11 +70,6 @@ data:
     - name: /asset
       link: https://homin.dev/asset
       reverse_proxy_link: http://asset.default.svc.cluster.local:8080
-      hide: true
-
-    - name: /dsb
-      link: https://homin.dev/dsb/
-      reverse_proxy_link: http://dsb.default.svc.cluster.local:8080
       hide: true
 
     - name: /dsb-api

@@ -19,7 +19,7 @@ metadata:
     app: blog
   name: blog
 spec:
-  replicas: 3
+  replicas: 2
   minReadySeconds: 1
   strategy:  
     type: RollingUpdate
