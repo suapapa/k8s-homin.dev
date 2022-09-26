@@ -37,26 +37,15 @@ spec:
       nodeSelector:
         cloud.google.com/gke-nodepool: work-pool
       containers:
-      - image: 'gcr.io/homin-dev/ingress:v1.0.10'
-        args: ["-p", "ingress", "-c", "/conf/links.yaml"]
-        name: ingress
-        ports:
-          - containerPort: 8080
-        volumeMounts:
-          - name: ingress-links
-            subPath: links.yaml
-            mountPath: /conf/links.yaml 
-        env:
-          - name: TELEGRAM_APITOKEN
-            valueFrom:
-              secretKeyRef:
-                name: mysecret
-                key: telegram_apitoken
-          - name: TELEGRAM_ROOM_ID
-            valueFrom:
-              secretKeyRef:
-                name: mysecret
-                key: telegram_room_id
+        - image: 'gcr.io/homin-dev/ingress:v1.0.10'
+          args: ["-p", "ingress", "-c", "/conf/links.yaml"]
+          name: ingress
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: ingress-links
+              subPath: links.yaml
+              mountPath: /conf/links.yaml 
       volumes:
         - name: ingress-links
           configMap:
