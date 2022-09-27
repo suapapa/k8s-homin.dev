@@ -47,8 +47,8 @@ data:
       desc: 페이스북
 
     - name: /insta
-      link: https://www.instagram.com/homin1227/
-      desc: 일상 사진
+      link: https://www.instagram.com/gophersaysingo_draft/
+      desc: 🖼️ Gophers says in Go - draft 🖼️ 
 
     - name: /gb
       link: https://homin.dev/gb
