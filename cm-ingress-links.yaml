@@ -76,3 +76,7 @@ data:
       link: https://homin.dev/dsb-api/
       reverse_proxy_link: http://dsb-api.default.svc.cluster.local:8080
       hide: true
+
+    - name: /rb
+      link: https://www.redbubble.com/people/suapapa/shop
+      hide: true
