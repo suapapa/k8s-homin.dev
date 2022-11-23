@@ -4,6 +4,8 @@ metadata:
   name: ingress-proxy
   labels:
     app: ingress-proxy
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
 spec:
   replicas: 1
   selector:
@@ -37,13 +39,9 @@ spec:
             - name: tcp
               containerPort: 9001
               hostPort: 9001
-          volumeMounts:
-            - name: ingress-links
-              subPath: links.yaml
-              mountPath: /conf/links.yaml 
-            - name: cert-letsencrypt
-              mountPath: /etc/letsencrypt
           env:
+            - name: BUCKET_NAME
+              value: homin-dev_asset
             - name: TELEGRAM_APITOKEN
               valueFrom:
                 secretKeyRef:
@@ -54,14 +52,39 @@ spec:
                 secretKeyRef:
                   name: mysecret
                   key: telegram_room_id
+          volumeMounts:
+            - name: ingress-links
+              subPath: links.yaml
+              mountPath: /conf/links.yaml 
+            # - name: cert-letsencrypt
+            #   mountPath: /etc/letsencrypt
+            - name: sa-key
+              subPath: gcsbc-key.json
+              mountPath: "/sa-key.json"
+              readOnly: true
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - SYS_ADMIN
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "gcsfuse --implicit-dirs --key-file=/sa-key.json ${BUCKET_NAME} /bucket"]
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "fusermount -u /bucket"]
       volumes:
         - name: ingress-links
           configMap:
             name: ingress-links
-        - name: cert-letsencrypt
-          hostPath:
-            path: /etc/letsencrypt
-            type: DirectoryOrCreate
+        # - name: cert-letsencrypt
+        #   hostPath:
+        #     path: /etc/letsencrypt
+        #     type: DirectoryOrCreate
         - name: mysecret
           secret:
             secretName: mysecret
+        - name: sa-key
+          secret:
+            secretName: sa-key
