@@ -21,7 +21,7 @@ metadata:
     app: asset
   name: asset
 spec:
-  replicas: 3
+  replicas: 1
   minReadySeconds: 1
   strategy:  
     type: RollingUpdate
