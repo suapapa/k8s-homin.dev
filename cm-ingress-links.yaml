@@ -48,7 +48,7 @@ data:
 
     - name: /insta
       link: https://www.instagram.com/gophersaysingo_draft/
-      desc: 🖼️ Gophers says in Go - draft 🖼️ 
+      desc: 🖼️ Gophers says in Go - draft
 
     - name: /gb
       link: https://homin.dev/gb
@@ -79,4 +79,10 @@ data:
 
     - name: /rb
       link: https://www.redbubble.com/people/suapapa/shop
+      hide: true
+
+    - name: /jaeger
+      link: https://homin.dev/jaeger/
+      reverse_proxy_link: http://simplest-query.default.svc.cluster.local:16686
+      reverse_proxy_omit_prefix: false
       hide: true
