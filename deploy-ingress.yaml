@@ -18,10 +18,10 @@ metadata:
   labels:
     app: ingress
   name: ingress
-  annotations:
-    "sidecar.jaegertracing.io/inject": "true"
+  # annotations:
+  #   "sidecar.jaegertracing.io/inject": "true"
 spec:
-  replicas: 1
+  replicas: 3
   minReadySeconds: 1
   strategy:  
     type: RollingUpdate
@@ -39,15 +39,28 @@ spec:
       nodeSelector:
         cloud.google.com/gke-nodepool: work-pool
       containers:
-        - image: 'gcr.io/homin-dev/ingress:v1.1.5'
+        - image: 'gcr.io/homin-dev/ingress:v1.1.10'
           args: ["-p", "ingress", "-c", "/conf/links.yaml"]
+          env:
+            - name: K8S_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: K8S_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name          
           name: ingress
           ports:
             - containerPort: 8080
           volumeMounts:
             - name: ingress-links
               subPath: links.yaml
-              mountPath: /conf/links.yaml 
+              mountPath: /conf/links.yaml
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "10m"
       volumes:
         - name: ingress-links
           configMap:
