@@ -60,12 +60,12 @@ data:
       reverse_proxy_link: http://ingress.default.svc.cluster.local:8080
       desc: 대가없는 🥩 환영합니다
 
-    - name: /mqtt
-      link: mosquitto.default.svc.cluster.local
-      port_foward: true
-      in_port: 9001
-      out_port: 9001
-      hide: true
+    # - name: /mqtt
+    #   link: mosquitto.default.svc.cluster.local
+    #   port_foward: true
+    #   in_port: 9001
+    #   out_port: 9001
+    #   hide: true
 
     - name: /asset
       link: https://homin.dev/asset
@@ -81,8 +81,8 @@ data:
       link: https://www.redbubble.com/people/suapapa/shop
       hide: true
 
-    - name: /jaeger
-      link: https://homin.dev/jaeger/
-      reverse_proxy_link: http://simplest-query.default.svc.cluster.local:16686
-      reverse_proxy_omit_prefix: false
-      hide: true
+    # - name: /jaeger
+    #   link: https://homin.dev/jaeger/
+    #   reverse_proxy_link: http://simplest-query.default.svc.cluster.local:16686
+    #   reverse_proxy_omit_prefix: false
+    #   hide: true
