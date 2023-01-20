@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fluent
+  labels:
+    app: fluent
+spec:
+  type: ClusterIP
+  ports:
+    - port: 24224
+      targetPort: 24224
+  selector:
+    app: fluentbit
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentbit
+  labels:
+    app: fluentbit
+spec:
+  selector:
+    matchLabels:
+      app: fluentbit
+  template:
+    metadata:
+      labels:
+        app: fluentbit
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: work-pool
+      containers:
+      - name: fluent-bit
+        image: fluent/fluent-bit:latest
+        ports:
+          - containerPort: 24224
+        volumeMounts:
+        # - name: varlog
+        #   mountPath: /var/log
+        # - name: varlibdockercontainers
+        #   mountPath: /var/lib/docker/containers
+        #   readOnly: true
+        - name: fluent-bit-config
+          mountPath: /fluent-bit/etc/
+        # - name: mnt
+        #   mountPath: /mnt
+        #   readOnly: true
+        # resources:
+        #   limits:
+        #     memory: 500Mi
+        #   requests:
+        #     cpu: 500m
+        #     memory: 100Mi
+      volumes:
+      # - name: varlog
+      #   hostPath:
+      #     path: /var/log
+      # - name: varlibdockercontainers
+      #   hostPath:
+      #     path: /var/lib/docker/containers
+      - name: fluent-bit-config
+        configMap:
+          name: fluent-bit-config
+      # - name: mnt
+      #   hostPath:
+      #     path: /mnt
