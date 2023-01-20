@@ -13,18 +13,15 @@ data:
 
     [INPUT]
         Name        forward
-        # Listen      127.0.0.1
-        Listen      0.0.0.0
-        Port        24224
+        # Listen      0.0.0.0
+        # Port        24224
 
     [OUTPUT]
-        Name        forward
-        Match       *
-        Host        homin.ddns.net
-        Port        24224
-        # Host          127.0.0.1
-        # Port          24284
-        # Shared_Key    secret
-        # Self_Hostname flb.local
-        # tls           on
-        # tls.verify    off
+        Name    forward
+        Match   *
+        Host    homin.ddns.net
+        Port    24224
+
+    [OUTPUT]
+        Name stdout
+        Match *
