@@ -5,7 +5,10 @@ metadata:
   labels:
     app: fluentbit
 data:
-  fluent-bit.conf: |
+  flb.conf: |
+    [SYSTEM]
+        plugins_file /conf/plugins.conf
+  
     # [SERVICE]
         # Flush      5
         # Daemon     off
@@ -15,6 +18,22 @@ data:
         Name        forward
         # Listen      0.0.0.0
         # Port        24224
+
+    [FILTER]
+        Name    rewrite_tag
+        Match   app.*
+        Rule    $level ^err $TAG.notify true
+        Rule    $level ^warn $TAG.notify true
+    
+    [OUTPUT]
+        Name    telegram
+        Match   app.*.notify
+        api_token               ${TG_API_TOKEN}
+        room_ids                ${TG_ROOM_IDS}
+        timestamp_location      Asia/Seoul
+        optional_keys           level,program,ver,hostname
+        surpress_duplication    yes
+        # floor_float             yes
 
     [OUTPUT]
         Name    forward
@@ -26,7 +45,11 @@ data:
         tls           on
         tls.verify    off
   
-
     [OUTPUT]
         Name stdout
         Match *
+
+  plugins.conf: |
+    [PLUGINS]
+      Path /plugins/out_telegram.so
+ 

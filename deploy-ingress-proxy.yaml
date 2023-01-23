@@ -81,13 +81,23 @@ spec:
             - containerPort: 24224
           volumeMounts:
             - name: fluent-bit-config
-              mountPath: /fluent-bit/etc/
+              mountPath: /conf
           env:
             - name: FLD_SHARED_KEY
               valueFrom:
                 secretKeyRef:
                   name: mysecret
                   key: fld_shared_key
+            - name: TG_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: telegram_apitoken
+            - name: TG_ROOM_IDS
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: telegram_room_id
 
       volumes:
         - name: ingress-links
