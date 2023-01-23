@@ -39,7 +39,7 @@ spec:
       nodeSelector:
         cloud.google.com/gke-nodepool: work-pool
       containers:
-        - image: 'gcr.io/homin-dev/ingress:v1.2.0'
+        - image: 'gcr.io/homin-dev/ingress:v1.2.1'
           args: ["-p", "ingress", "-c", "/conf/links.yaml"]
           env:
             - name: K8S_NODE_NAME

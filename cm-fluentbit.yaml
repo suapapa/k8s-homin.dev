@@ -21,6 +21,11 @@ data:
         Match   *
         Host    homin.ddns.net
         Port    24224
+        Shared_Key    ${FLD_SHARED_KEY}
+        Self_Hostname ${HOSTNAME}
+        tls           on
+        tls.verify    off
+  
 
     [OUTPUT]
         Name stdout
