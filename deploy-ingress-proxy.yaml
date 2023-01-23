@@ -74,6 +74,21 @@ spec:
             preStop:
               exec:
                 command: ["/bin/sh", "-c", "fusermount -u /bucket"]
+
+        - name: fluent-bit
+          image: fluent/fluent-bit:latest
+          ports:
+            - containerPort: 24224
+          volumeMounts:
+            - name: fluent-bit-config
+              mountPath: /fluent-bit/etc/
+          env:
+            - name: FLD_SHARED_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: fld_shared_key
+
       volumes:
         - name: ingress-links
           configMap:
@@ -88,3 +103,6 @@ spec:
         - name: sa-key
           secret:
             secretName: sa-key
+        - name: fluent-bit-config
+          configMap:
+            name: fluent-bit-config

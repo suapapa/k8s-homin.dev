@@ -30,19 +30,19 @@ spec:
       nodeSelector:
         cloud.google.com/gke-nodepool: work-pool
       containers:
-      - name: fluent-bit
-        image: fluent/fluent-bit:latest
-        ports:
-          - containerPort: 24224
-        volumeMounts:
-          - name: fluent-bit-config
-            mountPath: /fluent-bit/etc/
-        env:
-          - name: FLD_SHARED_KEY
-            valueFrom:
-              secretKeyRef:
-                name: mysecret
-                key: fld_shared_key
+        - name: fluent-bit
+          image: fluent/fluent-bit:latest
+          ports:
+            - containerPort: 24224
+          volumeMounts:
+            - name: fluent-bit-config
+              mountPath: /fluent-bit/etc/
+          env:
+            - name: FLD_SHARED_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: fld_shared_key
       volumes:
         - name: fluent-bit-config
           configMap:
