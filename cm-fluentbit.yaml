@@ -6,10 +6,8 @@ metadata:
     app: fluentbit
 data:
   flb.conf: |
-    [SYSTEM]
+    [SERVICE]
         plugins_file /conf/plugins.conf
-  
-    # [SERVICE]
         # Flush      5
         # Daemon     off
         # Log_Level  info
@@ -22,18 +20,20 @@ data:
     [FILTER]
         Name    rewrite_tag
         Match   app.*
-        Rule    $level ^err $TAG.notify true
-        Rule    $level ^warn $TAG.notify true
-    
+        Rule    $alert ^(.+)$ notify.$1 true
+        Rule    $level ^warn notify.telegram true
+        Rule    $level ^error notify.telegram true
+        Rule    $level ^fatal notify.telegram true
+
     [OUTPUT]
         Name    telegram
-        Match   app.*.notify
+        Match   notify.telegram
         api_token               ${TG_API_TOKEN}
         room_ids                ${TG_ROOM_IDS}
         timestamp_location      Asia/Seoul
         optional_keys           level,program,ver,hostname
         surpress_duplication    yes
-        # floor_float             yes
+        surpress_timeout        10s
 
     [OUTPUT]
         Name    forward
