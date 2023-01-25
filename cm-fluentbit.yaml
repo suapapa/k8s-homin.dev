@@ -31,6 +31,7 @@ data:
         api_token               ${TG_API_TOKEN}
         room_ids                ${TG_ROOM_IDS}
         timestamp_location      Asia/Seoul
+        timestamp_layout        20060102 15:04:05
         optional_keys           level,program,ver,hostname
         surpress_duplication    yes
         surpress_timeout        10s
