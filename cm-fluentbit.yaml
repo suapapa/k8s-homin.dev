@@ -5,6 +5,11 @@ metadata:
   labels:
     app: fluentbit
 data:
+
+  plugins.conf: |
+    [PLUGINS]
+      Path /plugins/out_telegram.so
+
   flb.conf: |
     [SERVICE]
         plugins_file /conf/plugins.conf
@@ -21,7 +26,7 @@ data:
         Name    rewrite_tag
         Match   app.*
         Rule    $alert ^(.+)$ notify.$1 true
-        Rule    $level ^warn notify.telegram true
+        # Rule    $level ^warn notify.telegram true
         Rule    $level ^error notify.telegram true
         Rule    $level ^fatal notify.telegram true
 
@@ -37,10 +42,10 @@ data:
         surpress_timeout        10s
 
     [OUTPUT]
-        Name    forward
-        Match   *
-        Host    homin.ddns.net
-        Port    24224
+        Name          forward
+        Match         *
+        Host          homin.ddns.net
+        Port          24224
         Shared_Key    ${FLD_SHARED_KEY}
         Self_Hostname ${HOSTNAME}
         tls           on
@@ -49,8 +54,4 @@ data:
     [OUTPUT]
         Name stdout
         Match *
-
-  plugins.conf: |
-    [PLUGINS]
-      Path /plugins/out_telegram.so
  
