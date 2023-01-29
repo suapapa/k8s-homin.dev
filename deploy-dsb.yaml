@@ -38,7 +38,7 @@ spec:
         cloud.google.com/gke-nodepool: work-pool
       containers:
         - name: diagrams-fe
-          image: 'gcr.io/homin-dev/diagrams_fe:latest'
+          image: 'gcr.io/homin-dev/diagrams_fe:v1.2.4'
           # resources: 
           #   limits: 
           #       cpu: 10m 
